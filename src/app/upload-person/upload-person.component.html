@@ -1,0 +1,47 @@
+<div class="container">
+    <div class="row">
+      <div class="col-2">
+        <form #uploadedPerson = "ngForm" (ngSubmit) = "uploadPerson(uploadedPerson.value)">
+          <div class="form-group">
+            <div class="text-center">
+                <img src="" class="rounded" alt="personImage">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="uploadedPersonImage">Upload image</label>
+            <input type="file" class="form-control-file" name="image" id="uploadedPersonImage" (change)="changeImageFile($event)" ngModel>
+          </div>
+          <div class="form-group">
+            <label for="uploadedPersonName">Name</label>
+            <input type="text" class="form-control" name="name" id="uploadedPersonName" placeholder="Enter name" ngModel>
+          </div>
+          <div class="form-group">
+            <label for="uploadedPersonSurname">Surname</label>
+            <input type="text" class="form-control" name="surname" id="uploadedPersonSurname" placeholder="Enter surname" ngModel>
+          </div>
+          <div class="form-group">
+            <label>Gender</label>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" id="uploadedPersonRadio1" value="Male" name="gender" checked ngModel>
+              <label class="form-check-label" for="uploadedPersonRadio1">
+                Male
+              </label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" id="uploadedPersonRadio2" value="Female" name="gender" ngModel>
+              <label class="form-check-label" for="uploadedPersonRadio2">
+                Female
+              </label>
+            </div>
+          </div>
+          <div class="form-group">
+              <label for="uploadedPersonAge">Age</label>
+              <select class="form-control" name="age" id="uploadedPersonAge" ngModel>
+                <option *ngFor="let i of age">{{i}}</option>>
+              </select>
+            </div>
+          <button type="submit" class="btn btn-primary">Upload</button>
+        </form>
+    </div>
+  </div>
+</div>
