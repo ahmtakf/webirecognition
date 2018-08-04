@@ -32,8 +32,6 @@ export class UploadPersonComponent implements OnInit {
   }
 
   uploadPerson(uploadedPerson) {
-      const formData = new FormData();
-      formData.append('image', this.image);
 
       const person: Person = new Person(0, this.image.name, uploadedPerson.name,
       uploadedPerson.surname, uploadedPerson.gender === 'Male' ? true : false, uploadedPerson.age);
@@ -41,13 +39,22 @@ export class UploadPersonComponent implements OnInit {
 
       this.http.post(this.addPerson, person).
         subscribe(res => {
+          let currentImage = '';
           if ( res.status === 200) {
+            console.log(res.text());
+            currentImage = res.text();
+
+            const blob: Blob = this.image.slice(0, this.image.size, this.image.type);
+            const imageFile = new File([blob], currentImage);
+            const formData = new FormData();
+            formData.append('image', imageFile);
+
             this.http.post(this.addImage, formData).
             subscribe(resImage => {
               console.log('success' + resImage);
             });
           }else {
-            this.http.delete(this.deletePerson + this.image).
+            this.http.delete(this.deletePerson + currentImage).
             subscribe(resImage => {
               console.log('fail' + resImage);
             });
