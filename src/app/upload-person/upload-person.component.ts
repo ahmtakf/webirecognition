@@ -12,9 +12,7 @@ export class UploadPersonComponent implements OnInit {
 
   age = [];
   image: File = undefined;
-  addPerson = 'http://localhost:8080/person/addPerson';
-  addImage = 'http://localhost:8080/person/addImage';
-  deletePerson = 'http://localhost:8080/person/deletePerson/';
+  addPerson = 'http://localhost:8080/person/add';
 
   constructor(private http: Http) {
     for (let i = 1; i <= 150; i++) {
@@ -26,39 +24,15 @@ export class UploadPersonComponent implements OnInit {
 
   }
 
-  changeImageFile(event) {
-    this.image = event.target.files.item(0);
-    console.log(this.image);
-  }
-
   uploadPerson(uploadedPerson) {
-
-      const person: Person = new Person(0, this.image.name, uploadedPerson.name,
+      console.log(uploadedPerson);
+      const person: Person = new Person(0, uploadedPerson.personID, uploadedPerson.name,
       uploadedPerson.surname, uploadedPerson.gender === 'Male' ? true : false, uploadedPerson.age);
       console.log(person);
 
       this.http.post(this.addPerson, person).
         subscribe(res => {
-          let currentImage = '';
-          if ( res.status === 200) {
-            console.log(res.text());
-            currentImage = res.text();
-
-            const blob: Blob = this.image.slice(0, this.image.size, this.image.type);
-            const imageFile = new File([blob], currentImage);
-            const formData = new FormData();
-            formData.append('image', imageFile);
-
-            this.http.post(this.addImage, formData).
-            subscribe(resImage => {
-              console.log('success' + resImage);
-            });
-          }else {
-            this.http.delete(this.deletePerson + currentImage).
-            subscribe(resImage => {
-              console.log('fail' + resImage);
-            });
-          }
+          console.log(res.text());
         });
 
       this.http.get('http://localhost:8080/person/persons').subscribe(data => {

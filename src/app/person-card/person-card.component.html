@@ -1,0 +1,12 @@
+<div class="card" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title">{{person.name + " " + person.surname}}</h5>
+      <h6 class="card-subtitle mb-2 text-muted">Age: {{person.age}}, Gender: {{person.gender}}</h6>
+      <p class="card-text">ID: {{person.personId}}</p>
+      <div class="form-group">
+          <label for="uploadedPersonImage">Upload image</label>
+          <input type="file" class="form-control-file" name="image" id="uploadedPersonImage" (change)="changeImageFile($event)" ngModel>
+      </div>
+      <button type="submit" class="btn btn-default" (click)="uploadImageFile()">Upload</button>
+    </div>
+  </div>

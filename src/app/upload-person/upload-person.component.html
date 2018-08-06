@@ -1,16 +1,7 @@
 <div class="container">
     <div class="row">
-      <div class="col-2">
+      <div class="col-6">
         <form #uploadedPerson = "ngForm" (ngSubmit) = "uploadPerson(uploadedPerson.value)">
-          <div class="form-group">
-            <div class="text-center">
-                <img src="" class="rounded" alt="personImage">
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="uploadedPersonImage">Upload image</label>
-            <input type="file" class="form-control-file" name="image" id="uploadedPersonImage" (change)="changeImageFile($event)" ngModel>
-          </div>
           <div class="form-group">
             <label for="uploadedPersonName">Name</label>
             <input type="text" class="form-control" name="name" id="uploadedPersonName" placeholder="Enter name" ngModel>
@@ -18,6 +9,10 @@
           <div class="form-group">
             <label for="uploadedPersonSurname">Surname</label>
             <input type="text" class="form-control" name="surname" id="uploadedPersonSurname" placeholder="Enter surname" ngModel>
+          </div>
+          <div class="form-group">
+              <label for="uploadedPersonSurname">ID</label>
+              <input type="text" class="form-control" name="personID" id="uploadedPersonID" placeholder="Enter ID" ngModel>
           </div>
           <div class="form-group">
             <label>Gender</label>

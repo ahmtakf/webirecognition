@@ -1,0 +1,24 @@
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+            <form #searchPerson = "ngForm" (ngSubmit) = "searchPeople(searchPerson.value)">
+            <table>
+                <body>
+                    <tr>
+                        <td>
+                            <input type="text" class="form-control" name="search" placeholder="Search" ngModel>
+                        </td>
+                        <td>
+                            <button type="submit" class="btn btn-default">Search</button>
+                        </td>
+                    </tr>
+                </body>
+            </table>
+            </form>
+        </div>
+    </div>
+</div>
+
+<app-person-card [person]="person" *ngFor="let person of persons">
+
+</app-person-card>
