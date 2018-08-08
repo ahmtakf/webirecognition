@@ -4,10 +4,10 @@ class Person {
     personId: string;
     name: string;
     surname: string;
-    gender: boolean;
+    gender: boolean | string;
     age: number;
 
-    constructor(id: number, personId: string, name: string, surname: string, gender: boolean, age: number) {
+    constructor(id: number, personId: string, name: string, surname: string, gender: boolean | string, age: number) {
         this.id = id;
         this.personId = personId;
         this.name = name;

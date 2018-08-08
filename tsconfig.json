@@ -16,5 +16,6 @@
       "dom"
     ],
     "baseUrl": "./src"
-  }
+  },
+  "include": ["node_modules/angular-bootstrap-md/**/*.ts",  "src/**/*.ts"] // add this line
 }

@@ -10,6 +10,9 @@ import { HttpModule } from '@angular/http';
 import { SearchPersonComponent } from './search-person/search-person.component';
 import { RouterModule} from '@angular/router';
 import { PersonCardComponent } from './person-card/person-card.component';
+import { CheckPersonComponent } from './check-person/check-person.component';
+import { CheckResultCardComponent } from './check-result-card/check-result-card.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +21,10 @@ import { PersonCardComponent } from './person-card/person-card.component';
     HeaderComponent,
     FooterComponent,
     SearchPersonComponent,
-    PersonCardComponent
+    PersonCardComponent,
+    CheckPersonComponent,
+    CheckResultCardComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -32,6 +38,18 @@ import { PersonCardComponent } from './person-card/person-card.component';
       {
         path: 'search-person',
         component: SearchPersonComponent
+      },
+      {
+        path: 'check-person',
+        component: CheckPersonComponent
+      },
+      {
+        path: 'login',
+        component: LoginComponent
+      },
+      {
+        path: '',
+        component: LoginComponent
       }
    ])
   ],
