@@ -8,6 +8,9 @@ import { Http} from '@angular/http';
 })
 export class LoginComponent implements OnInit {
 
+  register = 'http://localhost:8080/user/auth/register';
+  login = 'http://localhost:8080/user/auth/login';
+
   constructor(private http: Http) { }
 
   ngOnInit() {
@@ -15,10 +18,16 @@ export class LoginComponent implements OnInit {
 
   loginUser(user) {
     console.log(user);
+    this.http.post(this.login, user).subscribe((res) => {
+      console.log(res.text());
+    });
   }
 
   registerUser(user) {
     console.log(user);
+    this.http.post(this.register, user).subscribe((res) => {
+      console.log(res.text());
+    });
   }
 
 }
