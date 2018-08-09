@@ -13,6 +13,13 @@ import { PersonCardComponent } from './person-card/person-card.component';
 import { CheckPersonComponent } from './check-person/check-person.component';
 import { CheckResultCardComponent } from './check-result-card/check-result-card.component';
 import { LoginComponent } from './login/login.component';
+import { UserApiService } from './service/user-api.service';
+import { CookieService } from 'ngx-cookie-service';
+import { PersonApiService } from './service/person-api.service';
+import { ImageApiService } from './service/image-api.service';
+import { LogoutComponent } from './logout/logout.component';
+import { HomeComponent } from './home/home.component';
+import { DataTablesModule } from 'angular-datatables';
 
 @NgModule({
   declarations: [
@@ -24,12 +31,15 @@ import { LoginComponent } from './login/login.component';
     PersonCardComponent,
     CheckPersonComponent,
     CheckResultCardComponent,
-    LoginComponent
+    LoginComponent,
+    LogoutComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
+    DataTablesModule,
     RouterModule.forRoot([
       {
          path: 'upload-person',
@@ -50,10 +60,18 @@ import { LoginComponent } from './login/login.component';
       {
         path: '',
         component: LoginComponent
+      },
+      {
+        path: 'home',
+        component: HomeComponent
+      },
+      {
+        path: 'logout',
+        component: LogoutComponent
       }
    ])
   ],
-  providers: [],
+  providers: [UserApiService, PersonApiService, ImageApiService, CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

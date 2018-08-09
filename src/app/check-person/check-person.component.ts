@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Http} from '@angular/http';
 import Person from 'app/model/person';
+import { ImageApiService } from '../service/image-api.service';
 
 @Component({
   selector: 'app-check-person',
@@ -12,12 +12,10 @@ export class CheckPersonComponent implements OnInit {
   image: File;
   uploadImage: File;
   bestMatch: File;
-  checkURL = 'http://localhost:8080/image/check';
-  getImage = 'http://localhost:8080/image/getimage';
   person: Person;
   isAvailable: boolean;
 
-  constructor(private http: Http) {
+  constructor(private imageService: ImageApiService) {
     this.isAvailable = false;
    }
 
@@ -40,11 +38,8 @@ export class CheckPersonComponent implements OnInit {
   }
 
   checkImage() {
-    const formData = new FormData();
-    formData.append('image', this.uploadImage);
-    console.log(this.uploadImage);
 
-    this.http.post(this.checkURL, formData).subscribe(res => {
+    this.imageService.check(this.uploadImage).subscribe(res => {
       console.log(res);
       console.log(res.json());
       const result = res.json();
@@ -52,9 +47,8 @@ export class CheckPersonComponent implements OnInit {
       this.person.gender = this.person.gender ? 'Male' : 'Female';
 
       if ( res.status === 200) {
-        const url = new FormData();
-        url.append('url', result.url);
-        this.http.post(this.getImage, url, {responseType: 3}).subscribe((response) => {
+        console.log(result.url);
+        this.imageService.image(result.url).subscribe((response) => {
           const readerBest = new FileReader();
           readerBest.readAsDataURL(response.blob()); // read file as data url
           readerBest.onload = ((e) => { // called once readAsDataURL is completed

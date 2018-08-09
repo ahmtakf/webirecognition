@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import Share from './model/share';
 
 @Component({
   selector: 'app-root',
@@ -7,10 +8,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'app';
-  isLoginSuccess: boolean;
-
+  share: Share;
   constructor() {
-    this.isLoginSuccess = false;
+    this.share = Share.getInstance();
   }
 
 }

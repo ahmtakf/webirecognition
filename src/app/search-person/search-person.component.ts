@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Http} from '@angular/http';
 import Person from 'app/model/person';
 import 'rxjs/add/operator/map';
+import { PersonApiService } from '../service/person-api.service';
 
 @Component({
   selector: 'app-search-person',
@@ -11,10 +11,9 @@ import 'rxjs/add/operator/map';
 export class SearchPersonComponent implements OnInit {
 
   image: File;
-  searchURL = 'http://localhost:8080/person/search/';
   persons: Person[];
 
-  constructor(private http: Http) { }
+  constructor(private personService: PersonApiService) { }
 
   ngOnInit() {
   }
@@ -22,7 +21,7 @@ export class SearchPersonComponent implements OnInit {
   searchPeople(searchKey) {
     console.log(searchKey.search);
 
-    this.http.get(this.searchURL + searchKey.search).
+    this.personService.searchPeople(searchKey.search).
     subscribe( res => {
       console.log(res.json());
       this.persons = res.json().map((per, i) => {
