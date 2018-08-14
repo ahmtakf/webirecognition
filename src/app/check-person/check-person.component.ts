@@ -17,7 +17,7 @@ export class CheckPersonComponent implements OnInit {
 
   constructor(private imageService: ImageApiService) {
     this.isAvailable = false;
-   }
+  }
 
   ngOnInit() {
   }
@@ -31,7 +31,7 @@ export class CheckPersonComponent implements OnInit {
       reader.readAsDataURL(event.target.files[0]); // read file as data url
       reader.onload = ((e) => { // called once readAsDataURL is completed
         this.image = reader.result;
-        console.log(this.image);
+        console.log('Image file changed : ' + this.image);
       });
     }
 

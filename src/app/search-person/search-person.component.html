@@ -1,19 +1,21 @@
 <div class="container">
     <div class="row">
-        <div class="col-6 mx-auto">
+        <div class="col-6 m-5 mx-auto">
             <form #searchPerson = "ngForm" (ngSubmit) = "searchPeople(searchPerson.value)">
                 <div class="input-group">
-                    <input type="text" class="form-control" name="search" placeholder="Search" ngModel>
+                    <input type="text" class="form-control"  name="search" placeholder="Search" ngModel>
                     <span class="input-group-btn">
-                            <button class="btn btn-default" type="submit">Search</button>
+                            <button class="btn btn-primary" type="submit">Search</button>
                     </span>
                 </div>
             </form>
         </div>
     </div>
     <div class="row">
-        <div class="col mx-auto" *ngFor="let person of persons">
-            <app-person-card [person]="person" ></app-person-card>
+        <div class="col" >
+            <div class="card-group">
+                <app-person-card [person]="person" *ngFor="let person of persons"></app-person-card>
+            </div>
         </div>
     </div>
 </div>
