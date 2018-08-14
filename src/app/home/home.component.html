@@ -1,8 +1,7 @@
-<table datatable class="row-border hover">
+<table datatable [dtOptions]="dtOptions" class="row-border hover">
     <thead>
       <tr>
-        <th>ID</th>
-        <th>Source URL</th>
+        <th>Image</th>
         <th>Upload Date</th>
         <th>Person ID</th>
         <th>Name</th>
@@ -12,15 +11,5 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let image of images">
-        <td>{{ image.id }}</td>
-        <td>{{ image.url }}</td>
-        <td>{{ image.uploadDate }}</td>
-        <td>{{ image.person.personId }}</td>
-        <td>{{ image.person.name }}</td>
-        <td>{{ image.person.surname }}</td>
-        <td>{{ image.person.gender }}</td>
-        <td>{{ image.person.age }}</td>
-      </tr>
     </tbody>
 </table>

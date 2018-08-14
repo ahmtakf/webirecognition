@@ -20,7 +20,6 @@ class Config {
   getHeader() {
     const header = new Headers();
     header.append('Authorization', 'Bearer ' + new CookieService(document).get('token'));
-    console.log(header);
     return {headers: header};
   }
 

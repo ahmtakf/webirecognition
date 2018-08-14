@@ -6,11 +6,17 @@ const checkURL = '/image/check';
 const getImage = '/image/getimage';
 const ten = '/image/lasttenimages';
 const addImage = '/image/add';
+const table = '/image/datatable';
 
 @Injectable()
 export class ImageApiService {
 
   constructor(private http: Http) { }
+
+  getDataTable(params) {
+    return this.http.post(Config.getInstance().getServer() + table,
+      params, Config.getInstance().getHeader());
+  }
 
   check(imageUpload: File) {
     const formData = new FormData();
@@ -25,10 +31,6 @@ export class ImageApiService {
     opt.responseType = 3;
 
     return this.http.post(Config.getInstance().getServer() + getImage, formUrl, opt);
-  }
-
-  getLastTen() {
-    return this.http.get(Config.getInstance().getServer() + ten, Config.getInstance().getHeader());
   }
 
   addImage(image: File, personId: number) {

@@ -8,20 +8,50 @@ import { ImageApiService } from '../service/image-api.service';
 })
 export class HomeComponent implements OnInit {
 
-  images;
+  dtOptions: DataTables.Settings = {};
 
   constructor(private imageService: ImageApiService) { }
 
   ngOnInit() {
-
-    this.imageService.getLastTen().subscribe((res) => {
-      console.log( res.json());
-      this.images = res.json();
-      this.images = res.json().map((im, i) => {
-        im.person.gender = im.person.gender ? 'Male' : 'Female';
-        return im;
-      });
-    });
+    this.dtOptions = {
+        pagingType: 'full_numbers',
+        pageLength: 10,
+        serverSide: true,
+        processing: true,
+        ajax: (dataTablesParameters: any, callback) => this.imageService.getDataTable(dataTablesParameters).subscribe((res) => {
+          console.log(dataTablesParameters);
+          console.log( res.json());
+          callback({
+            data: res.json().data,
+            draw: res.json().draw,
+            error: res.json().error,
+            recordsFiltered: res.json().recordsFiltered,
+            recordsTotal: res.json().recordsTotal
+          });
+        }),
+        columns: [{ data: 'url' }, { data: 'uploadDate' }, { data: 'person.personId'},
+          {data: 'person.name'}, {data: 'person.surname'}, {data: 'person.gender'}, {data: 'person.age'}],
+        rowCallback: (row: Node, data: any[] | Object, index: number) => {
+            let node = row.firstChild;
+            const temp = new Image();
+            node.appendChild( temp);
+            this.imageService.image(node.textContent).subscribe((res) => {
+              const readerBest = new FileReader();
+              readerBest.readAsDataURL(res.blob()); // read file as data url
+              readerBest.onload = ((e) => { // called once readAsDataURL is completed
+                temp.src = readerBest.result;
+              });
+            });
+            node = node.nextSibling;
+            node.textContent = '' + new Date(Number(node.textContent));
+            node = node.nextSibling;
+            node = node.nextSibling;
+            node = node.nextSibling;
+            node = node.nextSibling;
+            node.textContent = node.textContent ? 'Male' : 'Female';
+            return row;
+        }
+    };
 
   }
 
