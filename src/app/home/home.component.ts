@@ -18,6 +18,7 @@ export class HomeComponent implements OnInit {
         pageLength: 10,
         serverSide: true,
         processing: true,
+        order: [1, 'DESC'],
         ajax: (dataTablesParameters: any, callback) => this.imageService.getDataTable(dataTablesParameters).subscribe((res) => {
           console.log(dataTablesParameters);
           console.log( res.json());
