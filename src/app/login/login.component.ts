@@ -34,7 +34,15 @@ export class LoginComponent implements OnInit {
 
   loginUser(user) {
     console.log(user);
-    this.userService.login(new User(0, user.username, user.password)).subscribe(( res) => {
+
+    if ( user.value.username === undefined || user.value.username === '') {
+      user.controls.username.markAsTouched();
+      return; }
+    if ( user.value.password === undefined || user.value.password === '') {
+      user.controls.password.markAsTouched();
+      return; }
+
+    this.userService.login(new User(0, user.value.username, user.value.password)).subscribe(( res) => {
       console.log(res.text());
       if (res.text() === '') {
         this.loginErrorMessage = 'Such user does not exist!';
@@ -49,7 +57,18 @@ export class LoginComponent implements OnInit {
 
   registerUser(user) {
     console.log(user);
-    this.userService.register(user).subscribe((res) => {
+
+    if ( user.value.username === undefined || user.value.username === '') {
+      user.controls.username.markAsTouched();
+      return; }
+    if ( user.value.password === undefined || user.value.password === '') {
+      user.controls.password.markAsTouched();
+      return; }
+    if ( user.value.repassword === undefined || user.value.repassword === '') {
+      user.controls.repassword.markAsTouched();
+      return; }
+
+    this.userService.register(user.value).subscribe((res) => {
       console.log(res.text());
       if (res.text() === '') {
         this.registerErrorMessage = 'Such user does not exist!';

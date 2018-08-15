@@ -5,7 +5,7 @@ import { AppComponent } from './app.component';
 import { UploadPersonComponent } from './upload-person/upload-person.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, NG_VALIDATORS, FormGroup, FormControl } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { SearchPersonComponent } from './search-person/search-person.component';
 import { RouterModule} from '@angular/router';

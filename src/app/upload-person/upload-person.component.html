@@ -1,42 +1,69 @@
 <div class="container ">
     <div class="row">
-      <div class="col-6 m-5 mx-auto">
-          <form #uploadedPerson = "ngForm" (ngSubmit) = "uploadPerson(uploadedPerson.value)">
-              <div class="form-group">
-                <label for="uploadedPersonName">Name</label>
-                <input type="text" class="form-control" name="name" id="uploadedPersonName" placeholder="Enter name" ngModel>
-              </div>
-              <div class="form-group">
-                <label for="uploadedPersonSurname">Surname</label>
-                <input type="text" class="form-control" name="surname" id="uploadedPersonSurname" placeholder="Enter surname" ngModel>
-              </div>
-              <div class="form-group">
-                  <label for="uploadedPersonSurname">ID</label>
-                  <input type="text" class="form-control" name="personID" id="uploadedPersonID" placeholder="Enter ID" ngModel>
-              </div>
-              <div class="form-group">
-                <label>Gender</label>
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input with-gap" type="radio" id="uploadedPersonRadio1" value="Male" name="gender" checked ngModel>
-                  <label class="form-check-label" for="uploadedPersonRadio1">
-                    Male
-                  </label>
+        <div class="col-6 m-5 mx-auto">
+            <form #uploadedPerson = "ngForm" (ngSubmit) = "uploadPerson(uploadedPerson)">
+                <div class="form-group">
+                    <label for="uploadedPersonName">Name</label>
+                    <input type="text" class="form-control" name="name" id="uploadedPersonName" placeholder="Enter name" required #name="ngModel" [(ngModel)]="uploadedPerson.name"/>
+                    <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger">
+                        <div *ngIf="name.errors.required">
+                            Name cannot be empty!
+                        </div>
+                    </div>
                 </div>
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input with-gap" type="radio" id="uploadedPersonRadio2" value="Female" name="gender" ngModel>
-                  <label class="form-check-label" for="uploadedPersonRadio2">
-                    Female
-                  </label>
+                <div class="form-group">
+                    <label for="uploadedPersonSurname">Surname</label>
+                    <input type="text" class="form-control" name="surname" id="uploadedPersonSurname" placeholder="Enter surname" required #surname="ngModel" [(ngModel)]="uploadedPerson.surname">
+                    <div *ngIf="surname.invalid && (surname.dirty || surname.touched)" class="alert alert-danger">
+                        <div *ngIf="surname.errors.required">
+                            Surname cannot be empty!
+                        </div>
+                    </div>
                 </div>
-              </div>
-              <div class="form-group">
-                  <label for="uploadedPersonAge">Age</label>
-                  <select class="form-control" name="age" id="uploadedPersonAge" ngModel>
-                      <option *ngFor="let i of age">{{i}}</option>>
-                  </select>
-              </div>
-              <button type="submit" class="btn btn-primary">Upload</button>
-          </form>
-    </div>
+                <div class="form-group">
+                    <label for="uploadedPersonSurname">ID</label>
+                    <input type="text" class="form-control" name="personID" id="uploadedPersonID" placeholder="Enter ID" required #personID="ngModel" [(ngModel)]="uploadedPerson.personID">
+                    <div *ngIf="personID.invalid && (personID.dirty || personID.touched)" class="alert alert-danger">
+                        <div *ngIf="personID.errors.required">
+                            ID cannot be empty!
+                        </div>
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    <label>Gender</label>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input with-gap" type="radio" id="uploadedPersonRadio1" value="Male" name="gender" checked required #gender="ngModel" [(ngModel)]="uploadedPerson.gender">
+                        <label class="form-check-label" for="uploadedPersonRadio1">
+                        Male
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input with-gap" type="radio" id="uploadedPersonRadio2" value="Female" name="gender"  required #gender="ngModel" [(ngModel)]="uploadedPerson.gender">
+                        <label class="form-check-label" for="uploadedPersonRadio2">
+                        Female
+                        </label>
+                    </div>
+                    <div *ngIf="gender.invalid && (gender.dirty || gender.touched)" class="alert alert-danger">
+                        <div *ngIf="gender.errors.required">
+                            Choose a gender
+                        </div>
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    <label for="uploadedPersonAge">Age</label>
+                    <select class="form-control" name="age" id="uploadedPersonAge" required #age="ngModel" [(ngModel)]="uploadedPerson.age">
+                        <option *ngFor="let i of ages">{{i}}</option>>
+                    </select>
+                    <div *ngIf="age.invalid && (age.dirty || age.touched)" class="alert alert-danger">
+                        <div *ngIf="age.errors.required">
+                            Choose an age
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Upload</button>
+            </form>
+        </div>
   </div>
 </div>

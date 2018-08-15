@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit {
         pageLength: 10,
         serverSide: true,
         processing: true,
-        order: [1, 'DESC'],
+        order: [1, 'DESC'], // Sort by last uploadDate
         ajax: (dataTablesParameters: any, callback) => this.imageService.getDataTable(dataTablesParameters).subscribe((res) => {
           console.log(dataTablesParameters);
           console.log( res.json());
@@ -34,9 +34,11 @@ export class HomeComponent implements OnInit {
           {data: 'person.name'}, {data: 'person.surname'}, {data: 'person.gender'}, {data: 'person.age'}],
         rowCallback: (row: Node, data: any[] | Object, index: number) => {
             let node = row.firstChild;
+            const url = node.textContent;
+            node.textContent = '';
             const temp = new Image();
             node.appendChild( temp);
-            this.imageService.image(node.textContent).subscribe((res) => {
+            this.imageService.image(url).subscribe((res) => {
               const readerBest = new FileReader();
               readerBest.readAsDataURL(res.blob()); // read file as data url
               readerBest.onload = ((e) => { // called once readAsDataURL is completed
